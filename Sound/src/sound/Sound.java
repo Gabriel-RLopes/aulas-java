@@ -2,20 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package primeiroprograma;
+package sound;
 
 /**
  *
  * @author grgab
  */
-public class PrimeiroPrograma {
+public class Sound {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println( "Java drives the web" );
+        double dist;
+        
+        dist = 7.2 * 1100;
+        
+        System.out.println( "The lightning is " + dist + " feet away" );
     }
     
 }
