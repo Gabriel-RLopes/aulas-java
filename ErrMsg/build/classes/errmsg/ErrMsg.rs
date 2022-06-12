@@ -1,0 +1,2 @@
+errmsg.ErrMsg
+errmsg.ErrorMsg
