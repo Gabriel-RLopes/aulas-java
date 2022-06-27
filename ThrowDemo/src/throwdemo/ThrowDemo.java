@@ -18,6 +18,7 @@ public class ThrowDemo {
         try{
             System.out.println("Before throw");
             throw new ArithmeticException();
+            //System.out.println("teste");
         }catch( ArithmeticException exc ){
             System.out.println("Exception caugth");
         }
