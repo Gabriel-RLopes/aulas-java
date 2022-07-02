@@ -16,10 +16,10 @@ public class Funcionario implements ModeloCrud {
     private int id;
     
     //criado array estatico assim o mesmo array é utilizado para multiplas instancias de funcionarios
-    private static String[][] funcionarios = new String[ 10 ][ 4 ];
+    private static String[][] funcionarios = new String[ 50 ][ 4 ];
     private static String[] recuperar = new String[ 4 ];
     
-    //getters e setters
+    //getters e setters 
     public void   setNome( String name )   { nome = name;     }
     public String getNome()                { return nome;     }
     public void   setCidade( String city ) { cidade = city;   }
@@ -34,12 +34,10 @@ public class Funcionario implements ModeloCrud {
     
     //metodo para imprimir na tela valores do array de funcionarios.
     public void show(){
-        for( int i = 0; i < funcionarios.length; i++ ){
-            if( funcionarios[ i ][ 0 ] == null ) break;
-            for( int j = 0; j < funcionarios[ i ].length; j++ ){
-                System.out.print( funcionarios[ i ][ j ] + " ");
-            } 
-          
+        for( String[] funcionario : funcionarios ){
+            if( funcionario[ 0 ] == null ) break;
+            for( String func : funcionario )
+                System.out.println(func);
             System.out.println();
         }
         System.out.println();
@@ -53,9 +51,8 @@ public class Funcionario implements ModeloCrud {
         int i;
         
         try{
-            for( i = 0; i < funcionarios.length; i++ ){
+            for( i = 0; i < funcionarios.length; i++ )
                 if( funcionarios[ i ][ 0 ] == null ) break;
-            }
         
             funcionarios[ i ][ 0 ] = Integer.toString( id );
             funcionarios[ i ][ 1 ] = nome;
@@ -74,10 +71,9 @@ public class Funcionario implements ModeloCrud {
         int j;
         
         try{
-            if( funcionarios[0][0] == null ) throw new ArrayIndexOutOfBoundsException();
-            for( j = 0; j < funcionarios.length; j++ ){
+            if( funcionarios[ 0 ][ 0 ] == null ) throw new ArrayIndexOutOfBoundsException();
+            for( j = 0; j < funcionarios.length; j++ )
                 if( id == Integer.parseInt( funcionarios[ j ][ 0 ] ) ) break;
-            }
             
             for( int i = 0; i < funcionarios[ j ].length; i++ ){
                 recuperar[ i ] = funcionarios[ j ][ i ];
@@ -153,16 +149,16 @@ public class Funcionario implements ModeloCrud {
     
     @Override
     public void validar(){
-        if( funcionarios[0][0] == null )
-            System.out.println("Nenhum funcionario incluido na fila atualmente!");
+        if( funcionarios[ 0 ][ 0 ] == null )
+            System.out.println( "Nenhum funcionario incluido na fila atualmente!" );
         else
-            System.out.println("Funcionarios na fila: " + contaFuncionarios() );
+            System.out.println( "Funcionarios na fila: " + contaFuncionarios() );
     }
     
     public int contaFuncionarios(){
         int i;
         for( i =0; i < funcionarios.length; i++ )
-            if( funcionarios[i][0] == null ) break;
+            if( funcionarios[ i ][ 0 ] == null ) break;
         
         return i;
     }
