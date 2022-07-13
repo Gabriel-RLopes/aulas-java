@@ -16,8 +16,8 @@ public class Funcionario implements ModeloCrud {
     private int id;
     
     //criado array estatico assim o mesmo array é utilizado para multiplas instancias de funcionarios
-    private static String[][] funcionarios = new String[ 50 ][ 4 ];
-    private static String[] recuperar = new String[ 4 ];
+    private static final String[][] funcionarios = new String[ 50 ][ 4 ];
+    private static final String[] recuperar = new String[ 4 ];
     
     //getters e setters 
     public void   setNome( String name )   { nome = name;     }
@@ -161,6 +161,16 @@ public class Funcionario implements ModeloCrud {
             if( funcionarios[ i ][ 0 ] == null ) break;
         
         return i;
+    }
+    
+    public boolean verificaIdDisponivel( int identificador ){
+        boolean idDisponivel = true;
+        for( int i = 0; i < funcionarios.length; i++ ){
+            if( Integer.parseInt( funcionarios[i][0] ) == identificador )
+                idDisponivel = false;
+            if( funcionarios[i][0] == null ) break;
+        }
+        return idDisponivel;
     }
     
 }

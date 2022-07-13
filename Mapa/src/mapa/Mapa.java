@@ -15,9 +15,6 @@ import static java.lang.System.exit;
 
 public class Mapa {
 
-    /**
-     * @param args the command line arguments
-     */
     //mostra menu de opções
     public static void Menu( String[] options ){
         System.out.println("Menu de funcionarios");
@@ -26,7 +23,11 @@ public class Mapa {
         }
         System.out.println("Escolha sua opção:");
     }
-    
+    /**
+    * @param args the command line arguments
+     * @throws java.io.IOException
+     * @throws java.lang.InterruptedException
+    */
     public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
         
@@ -76,6 +77,9 @@ public class Mapa {
         String nome, cidade, uf;
         int id;
         Funcionario funcionario = new Funcionario();
+        
+        System.out.println("Limite de inclusão 50");
+        System.out.println("Funcionarios incluidos: " + funcionario.contaFuncionarios());
         
         System.out.print("Informa o Id do funcionario: ");
         id = scan.nextInt();
