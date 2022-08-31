@@ -11,6 +11,7 @@ package mapa3;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Funcionario implements ModeloCrud {
     private int id;
@@ -34,23 +35,59 @@ public class Funcionario implements ModeloCrud {
         try{
             Connection conexao = Conexao.criaConexao();
             String sql = "INSERT INTO funcionarios ( id, nome, cidade, uf ) VAlues( " 
-                         + Integer.toString(id) + ", '" + nome + "', '"+ cidade + "', '"+ uf + "')"; 
+                         + Integer.toString( id ) + ", '" + nome + "', '"+ cidade + "', '"+ uf + "')"; 
             PreparedStatement ps = conexao.prepareStatement( sql );
             ps.execute();
-            conexao.commit();
         }catch( SQLException exc ){
-            System.out.println("Erro de sql");
+            System.out.println( "Erro de sql" + exc );
         }
     }
     
     @Override
     public void alterar(){
         
+        try{
+            Connection conexao = Conexao.criaConexao();
+            String sql = "UPDATE funcionarios SET nome=?, cidade=?, uf=? where id=?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString( 1, nome );
+            ps.setString( 2, cidade );
+            ps.setString( 3, uf );
+            ps.setString( 4, Integer.toString( id ) );
+            
+            int retorno = ps.executeUpdate();
+            if( retorno > 0 ){
+                System.out.println("Registro alterado");
+            } else {
+                System.out.println("Não foi possivel alterar o registro");
+            }
+        }catch( SQLException exc ){
+            System.out.println("Erro de sql" + exc );
+        }
+        
     }
     
     @Override
     public void excluir(){
-        
+        try{
+            Connection conexao = Conexao.criaConexao();
+            FuncionarioRecupera funcionario = new FuncionarioRecupera();
+            
+            funcionario.insertFuncionarioRec(id);
+            
+            String sql = "DELETE FROM funcionarios WHERE id=?";
+            PreparedStatement pd = conexao.prepareStatement( sql );
+            pd.setString( 1, Integer.toString( id ) );
+            
+            int retorno = pd.executeUpdate();
+            if( retorno > 0 ){
+                System.out.println("Registro deletado com sucesso");
+            }else{
+                System.out.println("Não foi possivel deletar registro");
+            }
+        }catch( SQLException exc ){
+            System.out.println("ERRO de sql" + exc );
+        }
     }
     
     @Override
